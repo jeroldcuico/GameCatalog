@@ -1,10 +1,12 @@
+import FeaturedGame from "@/components/features/featuredgame";
 import Hero from "@/components/heroSection/hero";
 
 // app/page.tsx   This is the main entry point for the Next.js application.
 export default function Home() {
   return (
     <>
-     <Hero />
+      <Hero />
+      <FeaturedGame />
     </>
   );
 }
