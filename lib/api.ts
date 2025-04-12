@@ -1,15 +1,50 @@
-// lib/api.ts
+// lib/fetchData.ts
 
-const API_BASE = "https://api.rawg.io/api";
+import { NextResponse } from "next/server";
+
 const API_KEY = process.env.NEXT_PUBLIC_RAWG_API_KEY;
+const BASE_URL = "https://api.rawg.io/api";
 
-export async function fetchGames() {
-  const res = await fetch(`${API_BASE}/games?key=${API_KEY}`);
+// Reusable function to fetch data from any endpoint
+export async function fetchData(
+  endpoint: string,
+  queryParams: Record<string, any> = {}
+) {
+  try {
+    // Ensure API key is available
+    if (!API_KEY) {
+      throw new Error(
+        "API_KEY is missing. Please check your environment variables."
+      );
+    }
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch games");
+    // Merge the API key and any other query parameters
+    const params = new URLSearchParams({ key: API_KEY, ...queryParams });
+    const url = `${BASE_URL}/${endpoint}?${params.toString()}`;
+
+    // Fetch data from the API
+    const response = await fetch(url);
+
+    // Check if the response is OK (status code 200)
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(
+        `Failed to fetch data from ${endpoint}. Error: ${
+          errorData?.detail || "Unknown error"
+        }`
+      );
+    }
+
+    // Parse and return the JSON response
+    const data = await response.json();
+    return NextResponse.json(data);
+  } catch (error: any) {
+    console.error(error); // Log the error for debugging
+
+    // Return a structured error response
+    return NextResponse.json(
+      { error: error.message || "Failed to fetch data" },
+      { status: 500 }
+    );
   }
-
-  const data = await res.json();
-  return data.results;
 }

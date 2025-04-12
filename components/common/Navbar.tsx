@@ -29,7 +29,7 @@ export default function Navbar() {
               className="w-full max-w-xs"
             />
             <Link href={"/"} className="text-gray-800 dark:text-white">Home</Link>
-            <Link href={"/allgames"}  className="text-gray-800 dark:text-white">Library</Link>
+            <Link href={"/games"}  className="text-gray-800 dark:text-white">Library</Link>
             <Link href={"/platforms"} className="text-gray-800 dark:text-white">Store</Link>
             <Link href={"/developers"} className="text-gray-800 dark:text-white">Developers</Link>
           </div>

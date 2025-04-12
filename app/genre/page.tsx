@@ -1,6 +1,14 @@
+"use client";
 import PageSection from "@/components/reusable/reusablepage";
+import { useEffect, useState } from "react";
 
-const genres = [
+type Genre = {
+  id: number;
+  name: string;
+  slug: string;
+};
+const API_KEY = process.env.RAWG_API_KEY;
+const genrelist = [
   {
     name: "Action",
     logo: "/images/genres/action.png",
@@ -44,9 +52,23 @@ const genres = [
 ];
 
 export default function page() {
+  const [genres, setGenres] = useState<Genre[]>([]);
+
+  useEffect(() => {
+    fetch(`https://api.rawg.io/api/games?key=${API_KEY}`)
+      .then((res) => res.json())
+      .then((data) => setGenres(data.results))
+      .catch((error) => console.error("Error fetching genres:", error));
+  }, []);
+
+  console.log(genres);
   return (
     <>
-      <PageSection title="Genres" tagline="Explore a variety of game genres to find your next adventure." items={genres} />
+      <PageSection
+        title="Genres"
+        tagline="Explore a variety of game genres to find your next adventure."
+        items={genrelist}
+      />
     </>
   );
 }
