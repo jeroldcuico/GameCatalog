@@ -5,52 +5,25 @@ import {
   CardContent,
   CardFooter,
 } from "@/components/ui/card";
-//import { useEffect, useState } from "react";
-import { rawData } from "../../lib/testObj";
+//import { rawData } from "../../lib/testObj";
+import type { getGameType } from "@/lib/types";
+
 
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import { Gamepad2Icon } from "lucide-react";
+import { useFetch } from "@/hooks/useFetch";
 
-const gamelist = rawData;
 
-// interface Game {
-//   id: number;
-//   title: string;
-//   name: string;
-//   description: string;
-//   background_image: string;
-// }
 
 export default function page() {
-  // const [games, setGames] = useState<Game[]>([]);
-  // const [loading, setLoading] = useState<boolean>(true);
-  // const [error, setError] = useState<string | null>(null);
 
-  // useEffect(() => {
-  //   const fetchGames = async () => {
-  //     try {
-  //       const response = await fetch("api/games");
-  //       if (!response.ok) {
-  //         throw new Error("Failed to fetch games");
-  //       }
-
-  //       const data = await response.json();
-  //       setGames(data.results); // Assuming the response has a 'results' property
-  //     } catch (error: any) {
-  //       setError(error.message);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   fetchGames();
-  // }, []);
-  // if (loading) return <p>Loading...</p>;
-  // if (error) return <p>Error: {error}</p>;
-
-  console.log(gamelist);
+  const { data, loading, error } = useFetch<{ results: getGameType[] }>("api/games");
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
+  const games = data?.results;
+  console.log(games);
 
   return (
     <>
@@ -75,7 +48,7 @@ export default function page() {
           </p>
         </div>
         <div className="w-full grid grid-cols-1 justify-center items-center sm:grid-cols-2 lg:grid-cols-5 gap-6 p-6">
-          {gamelist?.map((game) => (
+          {games?.map((game) => (
             <Card className="max-w-2xl rounded-md shadow-lg" key={game.id}>
               <CardHeader className="relative">
                 {/* Background Image */}
