@@ -1,4 +1,4 @@
-import FeaturedGame from "@/components/features/featuredgame";
+import FeaturedGame from "@/components/features/Featuredgame";
 import Hero from "@/components/heroSection/hero";
 
 // app/page.tsx   This is the main entry point for the Next.js application.

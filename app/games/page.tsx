@@ -6,7 +6,7 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 //import { rawData } from "../../lib/testObj";
-import type { getGameType } from "@/lib/types";
+import type { VapourGames } from "@/lib/types";
 
 
 import Image from "next/image";
@@ -14,17 +14,16 @@ import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import { Gamepad2Icon } from "lucide-react";
 import { useFetch } from "@/hooks/useFetch";
+import GameSkeleton from "@/components/common/GameSkeleton";
 
 
 
 export default function page() {
 
-  const { data, loading, error } = useFetch<{ results: getGameType[] }>("api/games");
-  if (loading) return <p>Loading...</p>;
+  const { data, loading, error } = useFetch<{ results: VapourGames[] }>("api/games");
+   if (loading) return <GameSkeleton />;
   if (error) return <p>Error: {error}</p>;
   const games = data?.results;
-  console.log(games);
-
   return (
     <>
       <div className="min-h-screen flex flex-col items-center justify-center px-6">

@@ -1,34 +1,18 @@
-import PageSection from "@/components/reusable/reusablepage";
+"use client";
+import type { VapourPlatforms } from "@/lib/types";
+import { useFetch } from "@/hooks/useFetch";
+import GameCard from "@/components/common/GameCard";
+import GameSkeleton from "@/components/common/GameSkeleton";
 
-const platforms = [
-  {
-    name: "Steam",
-    logo: "/images/platforms/steam.png",
-    link: "https://store.steampowered.com/",
-  },
-  {
-    name: "Epic Games",
-    logo: "/images/platforms/epic.png",
-    link: "https://www.epicgames.com/store/",
-  },
-  {
-    name: "Xbox",
-    logo: "/images/platforms/xbox.png",
-    link: "https://www.xbox.com/",
-  },
-  {
-    name: "PlayStation",
-    logo: "/images/platforms/playstation.png",
-    link: "https://www.playstation.com/",
-  },
-];
-
-export default function PlatformsPage() {
-  return (
-    <PageSection
-      title="Available Platforms"
-      items={platforms}
-      tagline="Explore a variety of platforms to find your next adventure."
-    />
+export default function page() {
+  const { data, loading, error } = useFetch<{ results: VapourPlatforms[] }>(
+    "api/platforms"
   );
+  if (loading) return <GameSkeleton/>;
+  if (error) return <p>Error: {error}</p>;
+  const platforms = data?.results || [];
+  const heading = "Platforms";
+  const tagline = "Explore games by platform.";
+
+  return <GameCard items={platforms} {...{ heading, tagline }} />;
 }

@@ -30,7 +30,7 @@ export default function Navbar() {
             />
             <Link href={"/"} className="text-gray-800 dark:text-white">Home</Link>
             <Link href={"/games"}  className="text-gray-800 dark:text-white">Library</Link>
-            <Link href={"/platforms"} className="text-gray-800 dark:text-white">Store</Link>
+            <Link href={"/stores"} className="text-gray-800 dark:text-white">Store</Link>
             <Link href={"/developers"} className="text-gray-800 dark:text-white">Developers</Link>
           </div>
         </div>

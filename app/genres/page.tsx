@@ -1,78 +1,17 @@
 "use client";
-import type { GetGenre } from "@/lib/types";
+import type { VapourGenres } from "@/lib/types";
 import { useFetch } from "@/hooks/useFetch";
-import { BackgroundPattern } from "@/components/heroSection/background-pattern";
-import {
-  Card,
-  CardHeader,
-  CardContent,
-  CardFooter,
-} from "@/components/ui/card";
-import Image from "next/image";
-import Link from "next/link";
-import { Badge } from "@/components/ui/badge";
-import { Gamepad } from "lucide-react";
+import GameCard from "@/components/common/GameCard";
 
 export default function page() {
-  const { data, loading, error } = useFetch<{ results: GetGenre[] }>(
+  const { data, loading, error } = useFetch<{ results: VapourGenres[] }>(
     "api/genres"
   );
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
-  const genres = data?.results;
-  console.log(genres);
-  const genreslist: any = [];
-  return (
-    <>
-      <section className="min-h-screen flex flex-col items-center justify-center px-6">
-        <div className="relative z-10 text-center max-w-2xl mt-10">
-          <h2 className="text-3xl font-bold mb-6 text-center">Genres</h2>
-          <p className="text-lg text-center mb-10">
-            Explore games by genre and find your next adventure.
-          </p>
-        </div>
-        <div className="w-full grid grid-cols-1 justify-center items-center sm:grid-cols-2 lg:grid-cols-5 gap-6 p-6">
-          {genres?.map((genre) => (
-            <Card className="max-w-2xl rounded-md shadow-lg" key={genre.id}>
-              <CardHeader className="relative">
-                {/* Background Image */}
-                <div className="w-full h-48 relative">
-                  <Image
-                    src={genre.image_background}
-                    alt={genre.name}
-                    layout="fill"
-                    sizes="60"
-                    objectFit="cover"
-                  />
-                  {/* Title Overlay */}
-                  <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black p-4">
-                    <h3 className="text-white text-2xl font-semibold">
-                      {genre.name}
-                    </h3>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <div className="flex flex-col justify-center items-center gap-3">
-                  <span className="font-semibold flex flex-wrap gap-2">
-                    <Badge variant="destructive" className="text-xs">
-                      {genre.games_count} Games
-                    </Badge>
-                  </span>
-                </div>
-              </CardContent>
-              <CardFooter className="flex justify-center">
-                <Link
-                  href={`/games/${genre.slug}`}
-                  className="inline-flex items-center justify-center rounded-sm bg-slate-500 text-white px-4 py-2 text-[12px] font-medium hover:bg-slate-600 transition duration-200"
-                >
-                  <Gamepad className="!h-5 !w-5" />{" "} Game List
-                </Link>
-              </CardFooter>
-            </Card>
-          ))}
-        </div>
-      </section>
-    </>
-  );
+  const genres = data?.results || [];
+  const heading = "Genres";
+  const tagline = "Explore games by genre.";
+
+  return <GameCard items={genres} {...{ heading, tagline }} />;
 }

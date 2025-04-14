@@ -1,19 +1,19 @@
-// app/developers/page.tsx
+"use client";
+import type { VapourDevelopers } from "@/lib/types";
+import { useFetch } from "@/hooks/useFetch";
+import GameCard from "@/components/common/GameCard";
+import GameSkeleton from "@/components/common/GameSkeleton";
 
-import PageSection from "@/components/reusable/reusablepage"
-const developers = [
-  {
-    name: "FromSoftware",
-    logo: "/images/developers/fromsoftware.png",
-    link: "https://www.fromsoftware.jp/",
-  },
-  {
-    name: "CD Projekt Red",
-    logo: "/images/developers/cdpr.png",
-    link: "https://en.cdprojektred.com/",
-  },
-]
+export default function page() {
+  const { data, loading, error } = useFetch<{ results: VapourDevelopers[] }>(
+    "api/developers"
+  );
+  if (loading) return <GameSkeleton />;
+  if (error) return <p>Error: {error}</p>;
+  const developers = data?.results || [];
 
-export default function DevelopersPage() {
-  return <PageSection title="Top Developers" items={developers} tagline="Discover the masterminds behind your favorite games." />
+  const heading = "Developers";
+  const tagline = "Discover the creators behind your favorite games.";
+
+  return <GameCard items={developers} {...{ heading, tagline }} />;
 }
