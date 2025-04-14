@@ -2,10 +2,9 @@
 export default function GameSkeleton() {
   return (
     <section className="min-h-screen flex flex-col items-center justify-center px-6">
-      <div className="relative z-10 text-center max-w-2xl mt-10">
-        <h2 className="text-3xl font-bold mb-6 text-center">items</h2>
-        <p className="text-lg text-center mb-10">
-          Explore games by item and find your next adventure.
+      <div className="relative z-10 text-center max-w-2xl mt-10 flex flex-col items-center justify-center">
+        <h2 className="w-34 h-8 bg-gray-300 animate-pulse rounded-sm mb-10"></h2>
+        <p className="w-64 h-8 bg-gray-300 animate-pulse rounded-sm mb-10">
         </p>
       </div>
 
