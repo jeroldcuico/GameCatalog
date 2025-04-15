@@ -1,4 +1,4 @@
-import ReusableCarousel from "../reusable/reusablecarousel";
+import ReusableCarousel from "@/components/reusable/reusablecarousel";
 
 const games = [
   {
@@ -52,5 +52,5 @@ const games = [
 ];
 
 export default function FeaturedGame() {
-  return <ReusableCarousel title="Featured Games" games={games} />;
+  return <ReusableCarousel games={games} title="Featured Games"  />;
 }

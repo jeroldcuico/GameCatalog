@@ -8,7 +8,6 @@ import {
 //import { rawData } from "../../lib/testObj";
 import type { VapourGames } from "@/lib/types";
 
-
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
@@ -16,12 +15,11 @@ import { Gamepad2Icon } from "lucide-react";
 import { useFetch } from "@/hooks/useFetch";
 import GameSkeleton from "@/components/common/GameSkeleton";
 
-
-
 export default function page() {
-
-  const { data, loading, error } = useFetch<{ results: VapourGames[] }>("api/games");
-   if (loading) return <GameSkeleton />;
+  const { data, loading, error } = useFetch<{ results: VapourGames[] }>(
+    "api/games"
+  );
+  if (loading) return <GameSkeleton />;
   if (error) return <p>Error: {error}</p>;
   const games = data?.results;
   return (
@@ -81,9 +79,11 @@ export default function page() {
                 </div>
               </CardContent>
               <CardFooter className="flex justify-center">
-                <Link href={`/games/${game.slug}`} className="inline-flex items-center justify-center rounded-sm bg-slate-500 text-white px-4 py-2 text-[12px] font-medium hover:bg-slate-600 transition duration-200">
-                
-                  <Gamepad2Icon className="!h-5 !w-5"/> View More
+                <Link
+                  href={`/games/${game.slug}`}
+                  className="inline-flex items-center gap-2 justify-center rounded-sm bg-slate-500 text-white px-4 py-2 text-[12px] font-medium hover:bg-slate-600 transition duration-200"
+                >
+                  <Gamepad2Icon className="!h-5 !w-5" /> Game Details
                 </Link>
               </CardFooter>
             </Card>

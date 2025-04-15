@@ -1,3 +1,5 @@
+import { LargeNumberLike } from "crypto";
+
 //Global Types
 interface BaseCatalog {
   id: number;
@@ -14,11 +16,45 @@ export interface GameData {
   added: number;
 }
 
-export interface VapourGenres extends BaseCatalog { }
-export interface VapourDevelopers extends BaseCatalog { }
-export interface VapourCreators extends BaseCatalog { }
-export interface VapourPlatforms extends BaseCatalog { }
-export interface VapourStores extends BaseCatalog { }
+export interface VapourGenres extends BaseCatalog {}
+export interface VapourDevelopers extends BaseCatalog {}
+export interface VapourCreators extends BaseCatalog {}
+export interface VapourTags extends BaseCatalog {}
+export interface VapourPlatforms extends BaseCatalog {
+  platform?: {
+    id:number;
+    name:string;
+    slug:string;
+  }
+}
+export interface VapourStores extends BaseCatalog {
+  store?: {
+    id:number;
+    name:string;
+    slug:string;
+    domain:string;
+  }
+}
+export interface VapourGameDetails extends BaseCatalog {
+  id: number;
+  slug: string;
+  name: string;
+  name_original: string;
+  metacritic: number;
+  genres: VapourGenres[];
+  developers: VapourDevelopers[];
+  creators: VapourCreators[];
+  platforms: VapourPlatforms[];
+  tags: VapourTags[];
+  stores: VapourStores[];
+  released: string;
+  description_raw: string;
+  background_image: string;
+  background_image_additional: string;
+  rating?: number;
+  ratings?: number[] | string[];
+
+}
 
 export interface VapourGames {
   id: number;

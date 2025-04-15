@@ -1,5 +1,7 @@
 import { fetchData } from "@/lib/api";
+import { NextRequest } from "next/server";
 
-export async function GET() {
-  return fetchData("games", { page: 1, page_size: 10 });
+export async function GET(req: NextRequest, { params }: { params: { id: number , category: string} }) {
+  const { id , category } = params;
+  return fetchData(`games/${category}/${id}`);
 }
