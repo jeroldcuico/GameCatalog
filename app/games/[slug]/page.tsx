@@ -47,7 +47,7 @@ export default function GameDetailsPage() {
           </div>
 
           <div className="flex flex-wrap gap-2">
-            {game.genres.map((genre, index) => (
+            {game.genres?.map((genre, index) => (
               <Badge key={index}>{genre.name}</Badge>
             ))}
           </div>
@@ -58,7 +58,7 @@ export default function GameDetailsPage() {
             <CardContent className="p-4 text-sm space-y-1 flex flex-col gap-3">
               <div className="flex flex-wrap gap-2">
                 <strong>Developer:</strong>
-                {game.developers.map((developer, index) => (
+                {game.developers?.map((developer, index) => (
                   <div key={index}>
                     <Badge className="text-sm">{developer.name}</Badge>
                   </div>
@@ -70,7 +70,7 @@ export default function GameDetailsPage() {
               </div>
               <div className="flex flex-wrap gap-2">
                 <strong>Platform:</strong> 
-                {game.platforms.map(({platform}, index) => (
+                {game.platforms?.map(({platform}, index) => (
                   <div key={index}>
                     <Badge className="text-sm" variant="outline">{platform?.name}</Badge>
                   </div>
