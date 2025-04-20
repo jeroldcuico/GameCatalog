@@ -1,5 +1,4 @@
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Gamepad2Icon, ShoppingBasketIcon } from "lucide-react";
 import { BackgroundPattern } from "./background-pattern";
 import Link from "next/link";

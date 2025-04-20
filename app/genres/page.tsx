@@ -3,7 +3,7 @@ import type { VapourGenres } from "@/lib/types";
 import { useFetch } from "@/hooks/useFetch";
 import GameCard from "@/components/common/GameCard";
 
-export default function page() {
+export default function Page() {
   const { data, loading, error } = useFetch<{ results: VapourGenres[] }>(
     "api/genres"
   );

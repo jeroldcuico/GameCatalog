@@ -15,7 +15,7 @@ import { Gamepad2Icon } from "lucide-react";
 import { useFetch } from "@/hooks/useFetch";
 import GameSkeleton from "@/components/common/GameSkeleton";
 
-export default function page() {
+export default function Page() {
   const { data, loading, error } = useFetch<{ results: VapourGames[] }>(
     "api/games"
   );
