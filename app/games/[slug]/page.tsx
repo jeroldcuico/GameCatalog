@@ -8,7 +8,6 @@ import { Star } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useFetch } from "@/hooks/useFetch";
 import { VapourGameDetails } from "@/lib/types";
-import Image from "next/image";
 
 export default function GameDetailsPage() {
   const { slug } = useParams(); // dynamic route param from /games/[slug]
@@ -32,7 +31,7 @@ export default function GameDetailsPage() {
       <div className="mt-6 grid md:grid-cols-4 gap-6">
         {/* Cover Image */}
         <div className="md:col-span-1">
-          <Image
+          <img
             src={game.background_image}
             alt={game.name_original}
             className="rounded-sm shadow-md w-full"
