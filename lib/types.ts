@@ -1,4 +1,4 @@
-//Global Types
+// Global Types
 interface BaseCatalog {
   id: number;
   name: string;
@@ -15,7 +15,7 @@ export interface GameData {
   added: number;
 }
 
-// Use type aliases for these, as they don't add anything new
+// Type aliases for these since they don't add new properties
 export type VapourGenres = BaseCatalog;
 export type VapourDevelopers = BaseCatalog;
 export type VapourCreators = BaseCatalog;

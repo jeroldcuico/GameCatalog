@@ -35,12 +35,12 @@ export async function fetchData(
     // Parse and return the JSON response
     const data = await response.json();
     return NextResponse.json(data);
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error(error); // Log the error for debugging
 
     // Return a structured error response
     return NextResponse.json(
-      { error: error.message || "Failed to fetch data" },
+      { error: "Failed to fetch data" },
       { status: 500 }
     );
   }
