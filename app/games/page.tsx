@@ -72,7 +72,7 @@ export default function Page() {
                   </span>
                   <span className="font-semibold flex flex-wrap gap-2">
                     Genre:{" "}
-                    {game.genres.map((g) => (
+                    {game.genres?.map((g) => (
                       <Badge key={g.id}>{g.name}</Badge>
                     ))}
                   </span>
