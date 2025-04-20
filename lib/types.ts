@@ -1,4 +1,3 @@
-
 //Global Types
 interface BaseCatalog {
   id: number;
@@ -8,6 +7,7 @@ interface BaseCatalog {
   image_background: string;
   games?: GameData[];
 }
+
 export interface GameData {
   id: number;
   name: string;
@@ -15,25 +15,29 @@ export interface GameData {
   added: number;
 }
 
-export interface VapourGenres extends BaseCatalog {}
-export interface VapourDevelopers extends BaseCatalog {}
-export interface VapourCreators extends BaseCatalog {}
-export interface VapourTags extends BaseCatalog {}
+// Use type aliases for these, as they don't add anything new
+export type VapourGenres = BaseCatalog;
+export type VapourDevelopers = BaseCatalog;
+export type VapourCreators = BaseCatalog;
+export type VapourTags = BaseCatalog;
+
 export interface VapourPlatforms extends BaseCatalog {
   platform?: {
-    id:number;
-    name:string;
-    slug:string;
-  }
+    id: number;
+    name: string;
+    slug: string;
+  };
 }
+
 export interface VapourStores extends BaseCatalog {
   store?: {
-    id:number;
-    name:string;
-    slug:string;
-    domain:string;
-  }
+    id: number;
+    name: string;
+    slug: string;
+    domain: string;
+  };
 }
+
 export interface VapourGameDetails extends BaseCatalog {
   id: number;
   slug: string;
@@ -52,7 +56,6 @@ export interface VapourGameDetails extends BaseCatalog {
   background_image_additional: string;
   rating?: number;
   ratings?: number[] | string[];
-
 }
 
 export interface VapourGames {

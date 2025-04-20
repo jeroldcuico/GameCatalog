@@ -4,7 +4,7 @@ import { useFetch } from "@/hooks/useFetch";
 import GameCard from "@/components/common/GameCard";
 import GameSkeleton from "@/components/common/GameSkeleton";
 
-export default function page() {
+export default function Page() {
   const { data, loading, error } = useFetch<{ results: VapourDevelopers[] }>(
     "api/developers"
   );
