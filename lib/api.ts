@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 // Ensure you specify a proper type for the API_KEY and queryParams
-const API_KEY = process.env.RAWG_API_KEY;
+const API_KEY = process.env.NEXT_PUBLIC_RAWG_API_KEY;
 const BASE_URL = "https://api.rawg.io/api";
 
 // Reusable function to fetch data from any endpoint
