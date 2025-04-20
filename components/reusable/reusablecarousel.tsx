@@ -1,27 +1,26 @@
-'use client'
-import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import Autoplay from "embla-carousel-autoplay"
-
-interface Game {
-  title: string
-  tags: string[]
-  description: string
-}
+"use client";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import Autoplay from "embla-carousel-autoplay";
+import type { VapourGames } from "@/lib/types";
+import Image from "next/image";
+import { formatDateToLong } from "@/lib/utils";
+import Link from "next/link";
 
 interface FeaturedCarouselProps {
-  title: string
-  games: Game[]
+  games?: VapourGames[];
 }
 
-export default function ReusableCarousel({ title, games }: FeaturedCarouselProps) {
+export default function ReusableCarousel({ games }: FeaturedCarouselProps) {
+  console.log(games);
+
   return (
     <section className="flex flex-col items-center justify-center px-6 mb-10">
-      <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold !leading-[1.2] tracking-tight text-center mt-10">
-        {title}
-      </h1>
-
       <div className="w-full mt-6 flex justify-center">
         <Carousel
           plugins={[
@@ -32,19 +31,36 @@ export default function ReusableCarousel({ title, games }: FeaturedCarouselProps
           className="w-full"
         >
           <CarouselContent>
-            {games.map((game, index) => (
-              <CarouselItem key={index} className="flex justify-center">
+            {games?.map((game, index) => (
+              <CarouselItem key={index} className="flex justify-center gap-3">
                 <Card className="w-[1200px] rounded-none">
-                  <CardContent className="p-6">
-                    <span className="text-4xl font-semibold">{index + 1}</span>
-                    <div className="mt-4 text-lg font-medium">{game.title}</div>
+                  <CardContent>
+                    <Link href={`/games/${game.slug}`}>
+                      <Image
+                        src={game.background_image}
+                        width={1200}
+                        height={150}
+                        alt={game.name}
+                      />
+                    </Link>
+
+                    <div className="mt-4 text-lg font-medium">{game.name}</div>
                     <div className="mt-2 flex flex-wrap gap-1">
-                      {game.tags.map((tag, i) => (
-                        <Badge key={i}>{tag}</Badge>
+                      <b>Platform: </b>
+                      {game.platforms?.map(({ platform }, i) => (
+                        <Badge variant={"destructive"} key={i}>
+                          {platform?.name}
+                        </Badge>
+                      ))}
+                    </div>
+                    <div className="mt-2 flex flex-wrap gap-1">
+                      <b>Genres: </b>
+                      {game.genres?.map(({ name, slug, id }, i) => (
+                        <Badge key={i}>{name}</Badge>
                       ))}
                     </div>
                     <div className="mt-4 text-sm text-gray-500 dark:text-green-100">
-                      {game.description}
+                      <b>Updated {formatDateToLong(game.updated || "")}</b>
                     </div>
                   </CardContent>
                 </Card>
@@ -54,5 +70,5 @@ export default function ReusableCarousel({ title, games }: FeaturedCarouselProps
         </Carousel>
       </div>
     </section>
-  )
+  );
 }

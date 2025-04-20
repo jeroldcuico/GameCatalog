@@ -3,8 +3,8 @@ interface BaseCatalog {
   id: number;
   name: string;
   slug: string;
-  games_count: number;
-  image_background: string;
+  games_count?: number;
+  image_background?: string;
   games?: GameData[];
 }
 
@@ -44,10 +44,10 @@ export interface VapourGameDetails extends BaseCatalog {
   name: string;
   name_original: string;
   metacritic: number;
-  genres: VapourGenres[];
-  developers: VapourDevelopers[];
-  creators: VapourCreators[];
-  platforms: VapourPlatforms[];
+  genres?: VapourGenres[];
+  developers?: VapourDevelopers[];
+  creators?: VapourCreators[];
+  platforms?: VapourPlatforms[];
   tags: VapourTags[];
   stores: VapourStores[];
   released: string;
@@ -64,11 +64,16 @@ export interface VapourGames {
   slug: string;
   title: string;
   released: string;
-  genres: VapourGenres[];
+  metacritic: number;
+  genres?: VapourGenres[];
   image_background?: string;
   games_count?: string;
+  tags?: VapourTags[];
+  stores?: VapourStores[];
+  platforms?: VapourPlatforms[]
   description: string;
   background_image: string;
+  updated?: string;
 }
 
 export type CatalogItem =
