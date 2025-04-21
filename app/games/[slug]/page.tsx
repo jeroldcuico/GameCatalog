@@ -8,6 +8,7 @@ import { Star } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useFetch } from "@/hooks/useFetch";
 import { VapourGameDetails } from "@/lib/types";
+import Link from "next/link";
 
 export default function GameDetailsPage() {
   const { slug } = useParams(); // dynamic route param from /games/[slug]
@@ -18,10 +19,7 @@ export default function GameDetailsPage() {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
   if (!data) return <p>No data found</p>;
-
   const game = data;
-  console.log(game);
-  
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-6 dark:text-white">
@@ -50,7 +48,9 @@ export default function GameDetailsPage() {
 
           <div className="flex flex-wrap gap-2">
             {game.genres?.map((genre, index) => (
+              <Link href={`/list/${genre?.id}-${genre?.slug}`}>
               <Badge key={index}>{genre.name}</Badge>
+              </Link>
             ))}
           </div>
 
@@ -62,35 +62,51 @@ export default function GameDetailsPage() {
                 <strong>Developer:</strong>
                 {game.developers?.map((developer, index) => (
                   <div key={index}>
+                     <Link href={`/list/${developer?.id}-${developer.slug}`}>
                     <Badge className="text-sm">{developer.name}</Badge>
+                  </Link>
                   </div>
-
                 ))}
               </div>
               <div>
-              <strong> Released:</strong> <Badge className="text-sm" variant="secondary">{game.released}</Badge>
+                <strong> Released:</strong>{" "}
+                <Badge className="text-sm" variant="secondary">
+                  {game.released}
+                </Badge>
               </div>
               <div className="flex flex-wrap gap-2">
-                <strong>Platform:</strong> 
-                {game.platforms?.map(({platform}, index) => (
+                <strong>Platform:</strong>
+                {game.platforms?.map(({ platform }, index) => (
                   <div key={index}>
-                    <Badge className="text-sm" variant="outline">{platform?.name}</Badge>
+                    <Link href={`/list/${platform?.id}-${platform?.slug}`}>
+                    <Badge className="text-sm" variant="outline">
+                      {platform?.name}
+                    </Badge>
+                    </Link>
                   </div>
                 ))}
               </div>
               <div className="flex flex-wrap gap-2">
-                <strong>Tags:</strong> 
+                <strong>Tags:</strong>
                 {game.tags.map((tag, index) => (
                   <div key={index}>
-                    <Badge className="text-sm" variant="destructive">{tag?.name}</Badge>
+                    <Link href={`/list/${tag.id}-${tag?.slug}`}>
+                    <Badge className="text-sm" variant="destructive">
+                      {tag?.name}
+                    </Badge>
+                    </Link>
                   </div>
                 ))}
               </div>
               <div className="flex flex-wrap gap-2">
-                <strong>Stores:</strong> 
-                {game.stores?.map(({store}, index) => (
+                <strong>Stores:</strong>
+                {game.stores?.map(({ store, id }, index) => (
                   <div key={index}>
-                    <Badge className="text-sm" variant="outline">{store?.name}</Badge>
+                    <Link href={`/list/${id}-${store?.slug}`}>
+                      <Badge className="text-sm" variant="outline">
+                        {store?.name}
+                      </Badge>
+                    </Link>
                   </div>
                 ))}
               </div>

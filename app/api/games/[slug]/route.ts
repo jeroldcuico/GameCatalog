@@ -7,5 +7,5 @@ export async function GET(
   { params }: { params: Promise<{ slug: string }> }
 ) {
   const { slug } = await params 
-  return fetchData(`games/${slug}`);
+  return fetchData(`games/${slug}`, { page: 1, page_size: 10 , ordering: "-rating" });
 }

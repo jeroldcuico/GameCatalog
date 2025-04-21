@@ -1,5 +1,4 @@
 "use client";
-import type { VapourGenres } from "@/lib/types";
 import { useFetch } from "@/hooks/useFetch";
 import GameCard from "@/components/common/GameCard";
 import GameSkeleton from "@/components/common/GameSkeleton";
@@ -40,6 +39,10 @@ export default function Page() {
       break;
   }
   const items = data?.results || [];
+  const slugProp = typeof slug === "string" ? slug : "" 
 
-  return <GameCard items={items} {...{ heading, tagline }} />;
+  console.log(items);
+  
+
+  return <GameCard items={items} {...{ heading, tagline, slug: slugProp }} />;
 }
