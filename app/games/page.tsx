@@ -5,7 +5,6 @@ import {
   CardContent,
   CardFooter,
 } from "@/components/ui/card";
-//import { rawData } from "../../lib/testObj";
 import type { VapourGames } from "@/lib/types";
 
 import Image from "next/image";

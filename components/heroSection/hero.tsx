@@ -5,7 +5,7 @@ import { BackgroundPattern } from "./background-pattern";
 const Hero = () => {
   return (
     <>
-      <section className="min-h-[50vh] flex flex-col items-center justify-center px-6">
+      <section className="min-h-2.5 mb-4 flex flex-col items-center justify-center px-6">
         <BackgroundPattern />
         <div className="relative z-10 text-center max-w-2xl mt-10">
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold !leading-[1.2] tracking-tight">

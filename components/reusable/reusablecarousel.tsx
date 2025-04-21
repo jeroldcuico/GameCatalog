@@ -21,7 +21,7 @@ export default function ReusableCarousel({ games }: FeaturedCarouselProps) {
 
   return (
     <section className="flex flex-col items-center justify-center px-6 mb-10">
-      <div className="w-full mt-6 flex justify-center">
+      <div className="w-full flex justify-center">
         <Carousel
           plugins={[
             Autoplay({
@@ -34,33 +34,38 @@ export default function ReusableCarousel({ games }: FeaturedCarouselProps) {
             {games?.map((game, index) => (
               <CarouselItem key={index} className="flex justify-center gap-3">
                 <Card className="w-[1200px] rounded-none">
-                  <CardContent>
-                    <Link href={`/games/${game.slug}`}>
-                      <Image
-                        src={game.background_image}
-                        width={1200}
-                        height={150}
-                        alt={game.name}
-                      />
-                    </Link>
-
-                    <div className="mt-4 text-lg font-medium">{game.name}</div>
-                    <div className="mt-2 flex flex-wrap gap-1">
-                      <b>Platform: </b>
-                      {game.platforms?.map(({ platform }, i) => (
-                        <Badge variant={"destructive"} key={i}>
-                          {platform?.name}
-                        </Badge>
-                      ))}
+                  <CardContent className="flex gap-5 flex-col md:flex-row">
+                    <div>
+                      <Link href={`/games/${game.slug}`}>
+                        <Image
+                          src={game.background_image}
+                          width={500}
+                          height={150}
+                          alt={game.name}
+                        />
+                      </Link>
                     </div>
-                    <div className="mt-2 flex flex-wrap gap-1">
-                      <b>Genres: </b>
-                      {game.genres?.map(({ name, slug, id }, i) => (
-                        <Badge key={i}>{name}</Badge>
-                      ))}
-                    </div>
-                    <div className="mt-4 text-sm text-gray-500 dark:text-green-100">
-                      <b>Updated {formatDateToLong(game.updated || "")}</b>
+                    <div>
+                      <div className="mt-4 text-lg font-medium">
+                        {game.name}
+                      </div>
+                      <div className="mt-2 flex flex-wrap gap-1">
+                        <b>Platform: </b>
+                        {game.platforms?.map(({ platform }, i) => (
+                          <Badge variant={"destructive"} key={i}>
+                            {platform?.name}
+                          </Badge>
+                        ))}
+                      </div>
+                      <div className="mt-2 flex flex-wrap gap-1">
+                        <b>Genres: </b>
+                        {game.genres?.map(({ name, slug, id }, i) => (
+                          <Badge key={i}>{name}</Badge>
+                        ))}
+                      </div>
+                      <div className="mt-4 text-sm text-gray-500 dark:text-green-100">
+                        <b>Updated {formatDateToLong(game.updated || "")}</b>
+                      </div>
                     </div>
                   </CardContent>
                 </Card>

@@ -20,6 +20,8 @@ export default function GameDetailsPage() {
   if (!data) return <p>No data found</p>;
 
   const game = data;
+  console.log(game);
+  
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-6 dark:text-white">
