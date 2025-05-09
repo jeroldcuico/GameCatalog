@@ -4,11 +4,12 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Star } from "lucide-react";
+import { Key, Star } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useFetch } from "@/hooks/useFetch";
 import { VapourGameDetails } from "@/lib/types";
 import Link from "next/link";
+import LoadingScreen from "@/components/common/LoadingScreen";
 
 export default function GameDetailsPage() {
   const { slug } = useParams(); // dynamic route param from /games/[slug]
@@ -16,7 +17,7 @@ export default function GameDetailsPage() {
     `/api/games/${slug}`
   );
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <LoadingScreen />;
   if (error) return <p>Error: {error}</p>;
   if (!data) return <p>No data found</p>;
   const game = data;
@@ -48,7 +49,7 @@ export default function GameDetailsPage() {
 
           <div className="flex flex-wrap gap-2">
             {game.genres?.map((genre, index) => (
-              <Link href={`/list/${genre?.id}-${genre?.slug}`}>
+              <Link href={`/list/${genre?.id}-${genre?.slug}`} key={index}>
               <Badge key={index}>{genre.name}</Badge>
               </Link>
             ))}

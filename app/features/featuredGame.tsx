@@ -1,4 +1,5 @@
-'use client'
+"use client";
+import LoadingScreen from "@/components/common/LoadingScreen";
 import ReusableCarousel from "@/components/reusable/reusablecarousel";
 import { useFetch } from "@/hooks/useFetch";
 import type { VapourGames } from "@/lib/types";
@@ -6,12 +7,13 @@ import type { VapourGames } from "@/lib/types";
 const API_KEY = process.env.NEXT_PUBLIC_RAWG_API_KEY;
 
 export default function FeaturedGame() {
-  const dateQueries = '&dates=2024-01-01,2025-12-31&ordering=-added'
+  const dateQueries = "&dates=2024-01-01,2025-12-31&ordering=-added";
   const { data, loading, error } = useFetch<{ results: VapourGames[] }>(
     `https://api.rawg.io/api/games?key=${API_KEY}${dateQueries}`
   );
 
-const games = data?.results
+  const games = data?.results;
 
-  return <ReusableCarousel games={games}/>;
+  if (loading) return <LoadingScreen />;
+  return <ReusableCarousel games={games} />;
 }
