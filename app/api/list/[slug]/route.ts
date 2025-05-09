@@ -8,5 +8,5 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ slug
   const parts = (slug as string).split("-");
   const getid = parts[0];
   const getcategory = parts[1];
-  return fetchData(`games`, { page: 1, page_size: 10, [getcategory] : getid , ordering: "rating" });
+  return fetchData(`games`, { page: 1, page_size: 10, [getcategory] : getid , ordering: "added" });
 }

@@ -40,12 +40,12 @@ export default function GameList({ games , category }: GameListProps) {
           </CardHeader>
           <CardContent>
             <div className="flex flex-col gap-3">
-              <span className="font-semibold">Released: {game.released}</span>
+              <span className="font-semibold">Released: {game.released || "No exact date"}</span>
               <span className="font-semibold flex flex-wrap gap-2">
                 Genre:{" "}
                 {game.genres?.map((g) => (
                   <Badge key={g.id}>{g.name}</Badge>
-                ))}
+                )) || "No Genre"}
               </span>
             </div>
           </CardContent>
