@@ -21,6 +21,7 @@ export default function ReusableCarousel({ games }: FeaturedCarouselProps) {
 
   return (
     <section className="flex flex-col items-center justify-center px-6 mb-10">
+      <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold !leading-[1.2] tracking-tight">FEATURED GAMES</h1>
       <div className="w-full flex justify-center">
         <Carousel
           plugins={[

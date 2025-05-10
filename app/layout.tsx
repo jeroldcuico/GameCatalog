@@ -28,8 +28,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
           >
             <Navbar />
             {children}
+            <Footer />
           </ThemeProvider>
-          <Footer />
         </body>
       </html>
     </>

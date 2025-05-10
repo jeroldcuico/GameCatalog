@@ -24,7 +24,7 @@ export function useFetch<T = any>(url: string) {
     };
 
     fetchData();
-  }, [url]); // Only fetch when `url` changes
+  }, [url]); 
 
   // Infinite scroll effect
   useEffect(() => {
