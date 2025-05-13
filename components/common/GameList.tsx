@@ -24,7 +24,7 @@ export default function GameList({ games , category }: GameListProps) {
             {/* Background Image */}
             <div className="w-full h-48 relative">
               <Image
-                src={game.background_image}
+                src={game?.background_image || '/defaultgame.png'}
                 alt={game.name}
                 layout="fill"
                 sizes="60"
