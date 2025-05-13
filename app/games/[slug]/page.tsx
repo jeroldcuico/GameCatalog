@@ -11,6 +11,13 @@ import { VapourGameDetails } from "@/lib/types";
 import Link from "next/link";
 import LoadingScreen from "@/components/common/LoadingScreen";
 
+const barColors: Record<number, string> = {
+  5: "bg-green-600",
+  4: "bg-blue-500",
+  3: "bg-yellow-500",
+  1: "bg-red-500",
+};
+
 export default function GameDetailsPage() {
   const { slug } = useParams(); // dynamic route param from /games/[slug]
   const { data, loading, error } = useFetch<VapourGameDetails>(
@@ -33,7 +40,7 @@ export default function GameDetailsPage() {
         {/* Cover Image */}
         <div className="md:col-span-1">
           <img
-            src={game.background_image}
+            src={game?.background_image || '/defaultgame.png'}
             alt={game.name_original}
             className="rounded-sm shadow-md w-full"
           />
@@ -46,11 +53,29 @@ export default function GameDetailsPage() {
             <Star className="w-5 h-5 text-yellow-400" />
             <span className="text-lg font-medium">{game.rating}</span>
           </div>
-
+          <div className="w-full max-w-xl space-y-4">
+            {game.ratings?.map(({ id, title, count, percent }) => (
+              <div key={id} className="space-y-1">
+                <div className="flex justify-between text-sm font-medium">
+                  <span className="capitalize">{title}</span>
+                  <span>{percent}%</span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+                  <div
+                    className={`${barColors[id] ?? "bg-gray-400"} h-full`}
+                    style={{ width: `${percent}%` }}
+                  />
+                </div>
+                <div className="text-xs">
+                  {count.toLocaleString()} ratings
+                </div>
+              </div>
+            ))}
+          </div>
           <div className="flex flex-wrap gap-2">
             {game.genres?.map((genre, index) => (
               <Link href={`/list/${genre?.id}-${genre?.slug}`} key={index}>
-              <Badge key={index}>{genre.name}</Badge>
+                <Badge key={index}>{genre.name}</Badge>
               </Link>
             ))}
           </div>
@@ -63,9 +88,9 @@ export default function GameDetailsPage() {
                 <strong>Developer:</strong>
                 {game.developers?.map((developer, index) => (
                   <div key={index}>
-                     <Link href={`/list/${developer?.id}-${developer.slug}`}>
-                    <Badge className="text-sm">{developer.name}</Badge>
-                  </Link>
+                    <Link href={`/list/${developer?.id}-${developer.slug}`}>
+                      <Badge className="text-sm">{developer.name}</Badge>
+                    </Link>
                   </div>
                 ))}
               </div>
@@ -80,9 +105,9 @@ export default function GameDetailsPage() {
                 {game.platforms?.map(({ platform }, index) => (
                   <div key={index}>
                     <Link href={`/list/${platform?.id}-${platform?.slug}`}>
-                    <Badge className="text-sm" variant="outline">
-                      {platform?.name}
-                    </Badge>
+                      <Badge className="text-sm" variant="outline">
+                        {platform?.name}
+                      </Badge>
                     </Link>
                   </div>
                 ))}
@@ -92,9 +117,9 @@ export default function GameDetailsPage() {
                 {game.tags.map((tag, index) => (
                   <div key={index}>
                     <Link href={`/list/${tag.id}-${tag?.slug}`}>
-                    <Badge className="text-sm" variant="destructive">
-                      {tag?.name}
-                    </Badge>
+                      <Badge className="text-sm" variant="destructive">
+                        {tag?.name}
+                      </Badge>
                     </Link>
                   </div>
                 ))}

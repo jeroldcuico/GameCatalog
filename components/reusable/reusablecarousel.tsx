@@ -17,11 +17,11 @@ interface FeaturedCarouselProps {
 }
 
 export default function ReusableCarousel({ games }: FeaturedCarouselProps) {
-  console.log(games);
-
   return (
     <section className="flex flex-col items-center justify-center px-6 mb-10">
-      <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold !leading-[1.2] tracking-tight">FEATURED GAMES</h1>
+      <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold !leading-[1.2] tracking-tight">
+        FEATURED GAMES
+      </h1>
       <div className="w-full flex justify-center">
         <Carousel
           plugins={[
@@ -48,7 +48,12 @@ export default function ReusableCarousel({ games }: FeaturedCarouselProps) {
                     </div>
                     <div>
                       <div className="mt-4 text-lg font-medium">
-                        {game.name}
+                        <Link
+                          href={`/games/${game.slug}`}
+                          className="hover:text-yellow-400"
+                        >
+                          {game.name}
+                        </Link>
                       </div>
                       <div className="mt-2 flex flex-wrap gap-1">
                         <b>Platform: </b>

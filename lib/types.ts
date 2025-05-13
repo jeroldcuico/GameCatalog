@@ -8,6 +8,13 @@ interface BaseCatalog {
   games?: GameData[];
 }
 
+type Rating =  {
+  id: number;
+  title: string;
+  count: number;
+  percent: number;
+};
+
 export interface GameData {
   id: number;
   name: string;
@@ -55,7 +62,7 @@ export interface VapourGameDetails extends BaseCatalog {
   background_image: string;
   background_image_additional: string;
   rating?: number;
-  ratings?: number[] | string[];
+  ratings?: Rating[];
 }
 
 export interface VapourGames {
